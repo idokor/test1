@@ -22,10 +22,12 @@ jobs:
           repository: 'idokor/test1_1'
           path: './test1_1'
       - run: |
+          cd ${{ github.workspace }}/test1_1
           git config --global user.email "you@example.com"
           git config --global user.name "Your Name"
       - run: |
           python ${{ github.workspace }}/create_file.py >> ${{ github.workspace }}/test1_1/new_file.txt
+          cd ${{ github.workspace }}/test1_1
           git add ${{ github.workspace }}/test1_1/new_file.txt
           git commit -m "added new file"
           git push
