@@ -16,3 +16,13 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: Check out second repository
+        uses: actions/checkout@v3
+        with:
+          repository: 'idokor/test1_1'
+          path: './test1_1'
+      - run: |
+          python ${{ github.workspace }}/create_file.py >> ${{ github.workspace }}/test1_1/new_file.txt
+          git add ${{ github.workspace }}/test1_1/new_file.txt
+          git commit -m "added new file"
+          git push
